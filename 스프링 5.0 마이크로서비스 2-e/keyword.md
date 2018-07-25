@@ -75,4 +75,22 @@
 
 
 ## 03. 스프링 부트로 만드는 마이크로서비스
-- oauth관련 예제는 안된다 ㅋ.
+- security + oauth관련 예제는 spring-boot-starter-parent를 최신(2.0.3.RELEASE) 으로 할 경우 oauth에 대한 dependency가 없어서 동작 안한다
+	- 2.0.0.M1 에서는 동작 성공
+- maven BOM(bil of materials 패턴)은 말 그대로 연관된 모듈들 버전을 맞춰서 pom.xml파일로 두는 것을 의미한다.
+	- 자세한 설명은 (https://medium.com/java-user-group-malta/maven-s-bill-of-materials-bom-b430ede60599) 참고
+- 레거시 방식과 스프링 부트와의 가장 큰 특징은 자기 완비적이라는 점. (sts 없이도 tomcat 없이도 실행 가능)
+- 회귀 테스트 : 수정(Modification)이 기대하지 않은 결과를 발생시키지 않는다는 것을 증명하기 위한 시스템이나 컴포넌트에 대한 선택적 재테스트.
+- HATEOAS : 네이게이션 링크가 응답에 포함돼 제공되는 REST 서비스 패턴
+- HAL : JSON을 바탕으로 자원 사이의 하이퍼링크를 표현하는 관례
+- 리액티브 스트림 : 논블로킹(non blocking), 역압(back pressure)으로 비동기 스트림 처리 표준을 제공하기 위한 계획
+	- http://atin.tistory.com/574 참고
+	- back pressure : 유동유체의 흐름이 방해를 받아 유체의 흐름방향과 반대방향으로 유체에 가해지는 압려을 말하는 것 (즉 뒷단에서 데이터를 푸쉬해주는 것을 의미)
+- SSH를 활용한 모니터링 기능은 스프링 부트 2.0에서 제거됨 (https://github.com/spring-projects/spring-boot/issues/7044)
+- docker를 통한 rabbit mq 설치
+	- rabbit mq 실행
+		- 초반 설치 이후 실행 : sudo docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 --restart=unless-stopped -e RABBITMQ_DEFAULT_USER=guest -e RABBITMQ_DEFAULT_PASS=guest rabbitmq:management
+		- 2번째부터 : sudo docker start rabbitmq
+	- docker process 보기 : docker ps (혹은 docker ps -a)
+	- docker process 정지 : docker stop rabbitmq (혹은 컨테이너 name (ps 때려보고 나오는 names))
+- JavaMailSender + fakeSMTP로 SMTP 테스트를 할 수 있으나 구현하지 않음 (귀찮아서)
